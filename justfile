@@ -1,8 +1,14 @@
 dev:
     fd 'go|templ' | entr -r bash -c 'just templ && godotenv go run .'
 
+# Build with platform-specific settings
 build: templ
-    CC=musl-gcc go build -ldflags='-linkmode external -extldflags "-static"' -o ./khatru-pyramid
+    #!/usr/bin/env sh
+    if [ "$(uname)" = "Darwin" ]; then
+        go build -o ./khatru-pyramid
+    else
+        CC=musl-gcc go build -ldflags='-linkmode external -extldflags "-static"' -o ./khatru-pyramid
+    fi
 
 templ:
     templ generate
