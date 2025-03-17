@@ -22,11 +22,34 @@ docker run \
 
 ### Manually build
 
+#### Linux
+
 ```sh
 git clone https://github.com/github-tijlxyz/khatru-pyramid && cd khatru-pyramid
 just build
 DOMAIN="example.com" RELAY_NAME="my relay" RELAY_PUBKEY=yourpubkey ./khatru-pyramid
 ```
+
+#### macOS
+```sh
+. ./bin/activate-hermit
+brew install entr
+```
+
+Update `users.json` with your nostr public key in hex:
+```json
+{
+    "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798": "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798"
+}
+```
+
+
+Run khatru pyramid:
+```sh
+just dev
+```
+
+Browse to http://0.0.0.0:3334/
 
 ### Configuration
 
